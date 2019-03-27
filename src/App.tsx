@@ -1,28 +1,57 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { hot } from 'react-hot-loader';
+import * as React from 'react';
+import { Component } from 'react';
+import routes from '../src/routes/routes';
+import privateRoutes from '../src/routes/privateRoutes';
+import PrivateLayout from '../src/pages/__layouts__/PrivateLayout';
+import {
+  Link,
+  Switch,
+  Route,
+  withRouter,
+  RouteComponentProps,
+  Router
+} from 'react-router-dom';
+import history from '../src/routes//history';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+type Props = RouteComponentProps;
+
+function App(props: Props) {
+  React.useEffect(() => {
+    const unsub = props.history.listen(location => {});
+
+    return () => {
+      unsub();
+    };
+  }, []);
+
+  return (
+    <div className="container">
+      <Router history={history}>
+        <main>
+          <Switch>
+            {routes.map(route => (
+              <Route key={route.path} {...route} />
+            ))}
+            {privateRoutes.map(route => (
+              <Route
+                key={route.path}
+                exact
+                path={route.path}
+                render={() => (
+                  <PrivateLayout
+                    component={route.component}
+                    route={route.path}
+                    title={route.title}
+                  />
+                )}
+              />
+            ))}
+          </Switch>
+        </main>
+      </Router>
+    </div>
+  );
 }
 
-export default App;
+export default hot(module)(withRouter(App));

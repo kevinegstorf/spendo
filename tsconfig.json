@@ -1,6 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "module": "esnext",
+    "target": "es2018",
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "strictNullChecks": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./typings"
+    ],
     "lib": [
       "dom",
       "dom.iterable",
@@ -12,12 +20,9 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "preserve"
+    "noEmit": true
   },
   "include": [
     "src"
