@@ -16,7 +16,7 @@ const styles: any = (theme: Theme) => ({
     fontWeight: 'bold',
     borderRadius: '4px',
     background: 'linear-gradient(135deg, #7755FE 0%, #E994F7 100%)',
-    color: '#fff',
+    color: theme.palette.primary.main,
     fontSize: '14px'
   },
   default: {
