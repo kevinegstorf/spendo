@@ -20,7 +20,7 @@ interface PaperButtonProps extends PaperProps {
 }
 
 interface Props extends WithStyles<typeof styles> {
-  icon?: any;
+  icon?: string;
   label?: string;
 }
 
