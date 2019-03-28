@@ -25,7 +25,7 @@ export const fetchCards = () => (dispatch: Dispatch) => {
  * INITIAL STATE
  */
 
-const initialState: State["cards"] = {
+const initialState: State["pages"]["cards"] = {
   cards: [],
   loading: false,
   error: false

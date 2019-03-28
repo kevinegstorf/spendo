@@ -14,7 +14,6 @@ interface Card {
   nameOnCard: string;
   validFromDate: string;
   expiresDate: string;
-  transactions: ReadonlyArray<Transaction>;
 }
 
 interface Customer {
@@ -47,11 +46,18 @@ interface Transaction {
 // MARK: app state types
 
 interface State {
-  banks: ReadonlyArray<Bank>;
-  cards: {
-    loading: boolean;
-    error: boolean;
-    cards: ReadonlyArray<Card>;
-  };
   customer: Customer;
+  banks: ReadonlyArray<Bank>;
+  pages: {
+    cards: {
+      loading: boolean;
+      error: boolean;
+      cards: ReadonlyArray<Card>;
+    };
+    transactions: {
+      loading: boolean;
+      error: boolean;
+      transactions: ReadonlyArray<Transaction>;
+    };
+  };
 }

@@ -22,7 +22,7 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
 });
 
 interface Props extends WithStyles<typeof styles> {
-  state: State["cards"];
+  state: State["pages"]["cards"];
   fetchCards: () => void;
 }
 
@@ -36,7 +36,7 @@ const Login: React.FunctionComponent<Props> = props => {
   return <>Cards</>;
 };
 
-const mapStateToProps = (state: any) => ({ state: state.pages.cards });
+const mapStateToProps = (state: State) => ({ state: state.pages.cards });
 
 export default connect(
   mapStateToProps,
