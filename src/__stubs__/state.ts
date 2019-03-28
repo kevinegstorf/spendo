@@ -4,7 +4,11 @@ import customer from "./customer";
 
 const state: State = {
   banks,
-  cards,
+  cards: {
+    loading: false,
+    error: false,
+    cards
+  },
   customer
 };
 
