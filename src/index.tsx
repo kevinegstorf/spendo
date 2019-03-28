@@ -14,10 +14,12 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 import { pageReducers } from "./pages";
+import { userReducer } from "./pages/Login/state";
 
 const store = createStore(
   combineReducers({
-    pages: pageReducers
+    pages: pageReducers,
+    auth: userReducer
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );

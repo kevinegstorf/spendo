@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect, DispatchProp } from 'react-redux';
 import {
   Typography,
   FormControl,
@@ -18,8 +19,12 @@ import { fireApp, provider } from '../../index';
 import withRoot from '../../withRoot';
 
 import spendrLogo from '../../logo.svg';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import { Link as RouteLink } from 'react-router-dom';
+import { Dispatch } from 'redux';
+import { updateUser } from './state';
+
+import history from '../../routes/history'
 
 const styles: StyleRulesCallback = (theme: Theme) => ({
   root: {
@@ -34,7 +39,7 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
   },
-  form: { 
+  form: {
     display: 'flex',
     flexDirection: 'column',
   },
@@ -45,23 +50,27 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   forget: {
     display: 'flex',
     justifyContent: 'center',
-    marginBottom: theme.spacing.unit
+    marginBottom: theme.spacing.unit,
   },
   a: {
     textDecoration: 'none',
   },
 });
 
-interface Props extends WithStyles<typeof styles> {}
+interface Props extends WithStyles<typeof styles> {
+  state: State['auth'];
+  updateUser: (payload: any) => void
+}
 
 const Login: React.FunctionComponent<Props> = (props) => {
-  const { classes } = props;
-  const initialState = {
+  const { classes, state, updateUser } = props;
+  console.log(props.state)
+  const initialStateLogin = {
     email: '',
     password: '',
   };
-  const [loginState, setLoginstate] = useState(initialState);
 
+  const [loginState, setLoginstate] = useState(initialStateLogin);
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const { email, password } = loginState;
@@ -69,8 +78,13 @@ const Login: React.FunctionComponent<Props> = (props) => {
   };
 
   useEffect(() => {
-    console.log('test', fireApp.auth().currentUser);
-  });
+      fireApp.auth().onAuthStateChanged((change) => {
+        updateUser(change)
+        if(change){
+          history.push('/menu');
+        }
+      })
+  },[]);
 
   const loginWithGoogle = () => {
     fireApp.auth().signInWithRedirect(provider);
@@ -161,13 +175,18 @@ const Login: React.FunctionComponent<Props> = (props) => {
         </Grid>
       </Grid>
       <Grid item xs={10} className={classes.center}>
-      <Typography variant="caption">
-      Heb je nog geen Account? <strong>Sign Up</strong>
-      </Typography>
+        <Typography variant="caption">
+          Heb je nog geen Account? <strong>Sign Up</strong>
+          {state.user && state.user.displayname}
+        </Typography>
       </Grid>
-
     </Grid>
   );
 };
 
-export default withRoot(withStyles(styles)(Login));
+const mapStateToProps = (state: State) => ({ state: state.auth });
+
+export default connect(
+  mapStateToProps,
+  {updateUser}
+)(withRoot(withStyles(styles)(Login)));

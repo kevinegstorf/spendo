@@ -4,6 +4,7 @@ import customer from "./customer";
 import transactions from "./transactions";
 
 const state: State = {
+  auth:{user: {}},
   banks,
   customer,
   pages: {

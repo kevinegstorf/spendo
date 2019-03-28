@@ -22,11 +22,12 @@ interface Props extends WithStyles<typeof styles> {
 const PrivateLayout: React.FunctionComponent<Props> = props => {
   const {component: Component} = props;
   return (
-    // <div></div>
     <div className={props.classes.root}>
       <Component route={props.route} className={props.classes.component} />
     </div>
   );
 };
+
+const mapStateToProps = (state: State) => ({ state: state.auth });
 
 export default withRoot(withStyles(styles)(PrivateLayout));

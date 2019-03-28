@@ -46,6 +46,9 @@ interface Transaction {
 // MARK: app state types
 
 interface State {
+  auth: {
+    user: any;
+  }
   customer: Customer;
   banks: ReadonlyArray<Bank>;
   pages: {
