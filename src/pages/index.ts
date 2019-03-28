@@ -9,8 +9,11 @@ export { default as Goals } from "./Goals";
  */
 
 import { combineReducers } from "redux";
+
 import cardsPageReducer from "./Cards/state";
+import transactionsPageReducer from "./Transactions/state";
 
 export const pageReducers = combineReducers({
-  cards: cardsPageReducer
+  cards: cardsPageReducer,
+  transactions: transactionsPageReducer
 });
