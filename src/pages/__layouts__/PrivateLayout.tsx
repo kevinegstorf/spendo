@@ -9,19 +9,20 @@ import {
   StyleRulesCallback
 } from '@material-ui/core/styles';
 import { withTheme, Typography } from '@material-ui/core';
-import withRoot from '../..//withRoot';
+import withRoot from '../../withRoot';
 
 const styles: StyleRulesCallback = (theme: Theme) => ({});
 
 interface Props extends WithStyles<typeof styles> {
-  component: React.ReactType | React.ComponentType;
+  component: any;
   route: string;
   title: string | undefined;
 }
 
 const PrivateLayout: React.FunctionComponent<Props> = props => {
-  const Component = props.component;
+  const {component: Component} = props;
   return (
+    // <div></div>
     <div className={props.classes.root}>
       <Component route={props.route} className={props.classes.component} />
     </div>
