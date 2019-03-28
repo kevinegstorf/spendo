@@ -25,7 +25,6 @@ const store = createStore(
 );
 
 const CONFIG = {
-  apiKey: "AIzaSyDFBfATxROvtSbvH7lwkMCd7JP-zB5GzzU",
   authDomain: "spendr-3a024.firebaseapp.com",
   databaseURL: "https://spendr-3a024.firebaseio.com",
   projectId: "spendr-3a024",
