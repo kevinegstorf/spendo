@@ -1,3 +1,5 @@
+import { Category, Currency } from "../enums";
+
 const transactions: ReadonlyArray<Transaction> = [
   {
     id: "adbc",

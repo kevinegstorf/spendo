@@ -30,18 +30,6 @@ interface Customer {
   };
 }
 
-enum Category {
-  TRAVEL = "travel",
-  SOFTWARE = "software",
-  FOOD = "food",
-  UNKNOWN = "unknown"
-}
-
-enum Currency {
-  EURO = "eur",
-  DOLLAR = "dollar"
-}
-
 interface Balance {
   currency: Currency;
   amount: number;
@@ -60,6 +48,10 @@ interface Transaction {
 
 interface State {
   banks: ReadonlyArray<Bank>;
-  cards: ReadonlyArray<Card>;
+  cards: {
+    loading: boolean;
+    error: boolean;
+    cards: ReadonlyArray<Card>;
+  };
   customer: Customer;
 }
