@@ -1,11 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
+import "./index.css";
+import { BrowserRouter } from "react-router-dom";
+
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+
+import { pageReducers } from "./pages";
+
+const store = createStore(
+  combineReducers({
+    pages: pageReducers
+  }),
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 const CONFIG = {
   apiKey: "AIzaSyDFBfATxROvtSbvH7lwkMCd7JP-zB5GzzU",
@@ -20,9 +35,11 @@ const CONFIG = {
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
