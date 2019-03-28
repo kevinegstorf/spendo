@@ -50,6 +50,7 @@ interface Balance {
 interface Transaction {
   id: string;
   name: string;
+  logoUrl: string;
   category: Category;
   date: string;
   balance: Balance;

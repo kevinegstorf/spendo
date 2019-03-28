@@ -2,6 +2,7 @@ const transactions: ReadonlyArray<Transaction> = [
   {
     id: "adbc",
     name: "SLACK",
+    logoUrl: "https://logo.clearbit.com/slack.com",
     category: Category.SOFTWARE,
     date: "01-03-2019 12:00",
     balance: {
@@ -12,6 +13,7 @@ const transactions: ReadonlyArray<Transaction> = [
   {
     id: "abcd",
     name: "UBER",
+    logoUrl: "https://logo.clearbit.com/uber.com",
     category: Category.TRAVEL,
     date: "01-03-2019 14:00",
     balance: {
@@ -22,6 +24,7 @@ const transactions: ReadonlyArray<Transaction> = [
   {
     id: "abcd",
     name: "Starbucks",
+    logoUrl: "https://logo.clearbit.com/starbucks.com",
     category: Category.FOOD,
     date: "31-02-2019 16:00",
     balance: {
@@ -32,6 +35,7 @@ const transactions: ReadonlyArray<Transaction> = [
   {
     id: "abcd",
     name: "Delta",
+    logoUrl: "https://logo.clearbit.com/delta.com",
     category: Category.TRAVEL,
     date: "31-02-2019 15:43",
     balance: {
